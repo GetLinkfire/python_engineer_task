@@ -1,25 +1,17 @@
-# python_engineer_task
+# Python Engineer Exercise
 
-Welcome! We have prepared a little implementing exercise for you.
+Welcome! We have prepared a little exercise for you.
 
 The task is to build a miniature data pipeline: In lack of a streaming source,
-pull a sample data set per http,
-do some basice validation and transformation on the data, and write to disk.
+pull the [sample data set](https://raw.githubusercontent.com/GetLinkfire/python_engineer_task/master/data.json.gz) via https,
+do some simplified validation, transformation, and splitting of the data, and write the output to disk.
 
 
 In more detail, the program should do the following, not necessarily in that order:
 
- - Download our zipped line-json file with sample data from [here](https://tba)
- - Process one line at a time
- - Split records by values in the `type` field and create one output file for each `type`
- - Whenever there is a `convValue`, convert to USD in `convUsdValue` using [rates.json](https://tba) and `convValueUnit`
- - Validate that the `linkid` is a valid UUID using standard library
- - Append non-valid records to a separate output file
- - Output line json files again
-
-
-
-
-link to files in the repo:
-https://raw.githubusercontent.com/python/black/master/CONTRIBUTING.md
-
+ - Fetch our zipped line-json file with sample data from [here](https://raw.githubusercontent.com/GetLinkfire/python_engineer_task/master/data.json.gz).
+ - Output (not gzipped) line-json files again.
+ - Process one line at a time, pretending that you're processing a stream.
+ - Whenever there is a `convvalue`, use the [rates.json](https://raw.githubusercontent.com/GetLinkfire/python_engineer_task/master/rates.json) and `convvalueunit` to convert the value to USD. Write that value to a new field `convusdvalue`.
+ - Split records by values in the `type` field and create one output file for each `type`.
+ - Validate that the `linkid` is a valid UUID, using the standard library. Invalid records must go to their own output file, e.g. "deadletters.json".
